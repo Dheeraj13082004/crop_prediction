@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Crop Recommendation System</h2>
+    <form id="cropForm">
+        <div class="form-group">
+            <label for="N">Nitrogen (N):</label>
+            <input type="text" class="form-control" id="N" name="N" required>
+        </div>
+        <div class="form-group">
+            <label for="P">Phosphorus (P):</label>
+            <input type="text" class="form-control" id="P" name="P" required>
+        </div>
+        <div class="form-group">
+            <label for="K">Potassium (K):</label>
+            <input type="text" class="form-control" id="K" name="K" required>
+        </div>
+        <div class="form-group">
+            <label for="temperature">Temperature:</label>
+            <input type="text" class="form-control" id="temperature" name="temperature" required>
+        </div>
+        <div class="form-group">
+            <label for="humidity">Humidity:</label>
+            <input type="text" class="form-control" id="humidity" name="humidity" required>
+        </div>
+        <div class="form-group">
+            <label for="ph">pH:</label>
+            <input type="text" class="form-control" id="ph" name="ph" required>
+        </div>
+        <div class="form-group">
+            <label for="rainfall">Rainfall:</label>
+            <input type="text" class="form-control" id="rainfall" name="rainfall" required>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="predictCrop()">Predict Crop</button>
+    </form>
+
+    <h4 class="mt-4">Prediction Result:</h4>
+    <p id="predictionResult"></p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script>
+    function predictCrop() {
+        // Get input values from the form
+        var N = $('#N').val();
+        var P = $('#P').val();
+        var K = $('#K').val();
+        var temperature = $('#temperature').val();
+        var humidity = $('#humidity').val();
+        var ph = $('#ph').val();
+        var rainfall = $('#rainfall').val();
+
+        // Prepare data for prediction
+        var data = tf.tensor2d([[N, P, K, temperature, humidity, ph, rainfall]]);
+
+        // Load the trained model (Random Forest in this example)
+        async function loadModel() {
+            const model = await tf.loadLayersModel('path/to/your/model.json');
+            const prediction = model.predict(data);
+            const result = prediction.dataSync()[0];
+
+            // Display the result on the webpage
+            $('#predictionResult').text('Predicted Crop: ' + result);
+        }
+
+        // Call the loadModel function
+        loadModel();
+    }
+</script>
+
+</body>
+</html>
