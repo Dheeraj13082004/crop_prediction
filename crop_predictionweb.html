@@ -1,81 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crop Recommendation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('https://tse2.mm.bing.net/th?id=OIP.waVccGSl_-u74ZFmtWKrBAHaEo&pid=Api&P=0&h=220');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #ffffff; /* Set text color to white for better visibility */
+        }
+
+        .container {
+            background-image:url('https://tse2.mm.bing.net/th?id=OIP.waVccGSl_-u74ZFmtWKrBAHaEo&pid=Api&P=0&h=220'); /* Adjust the background opacity */
+            display: block;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Crop Recommendation System</h2>
+        <form id="cropForm">
+            <div class="form-group">
+                <label for="N">Nitrogen (N):</label>
+                <input type="number" class="form-control" id="N" name="N" required>
+            </div>
+            <div class="form-group">
+                <label for="P">Phosphorus (P):</label>
+                <input type="number" class="form-control" id="P" name="P" required>
+            </div>
+            <div class="form-group">
+                <label for="K">Potassium (K):</label>
+                <input type="number" class="form-control" id="K" name="K" required>
+            </div>
+            <div class="form-group">
+                <label for="temperature">Temperature:</label>
+                <input type="number" class="form-control" id="temperature" name="temperature" required>
+            </div>
+            <div class="form-group">
+                <label for="humidity">Humidity:</label>
+                <input type="number" class="form-control" id="humidity" name="humidity" required>
+            </div>
+            <div class="form-group">
+                <label for="ph">pH:</label>
+                <input type="number" class="form-control" id="ph" name="ph" required>
+            </div>
+            <div class="form-group">
+                <label for="rainfall">Rainfall:</label>
+                <input type="number" class="form-control" id="rainfall" name="rainfall" required>
+            </div>
+           <a href="index.html">  <button type="button" class="btn btn-primary" onclick="predictCrop()">Predict Crop</button></a>
+        </form>
+    
+        <h4 class="mt-4">Prediction Result:</h4>
+        <p id="predictionResult"></p>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script>
+        function predictCrop() {
+            // Get input values from the form
+            var N = $('#N').val();
+            var P = $('#P').val();
+            var K = $('#K').val();
+            var temperature = $('#temperature').val();
+            var humidity = $('#humidity').val();
+            var ph = $('#ph').val();
+            var rainfall = $('#rainfall').val();
+    
+            // Prepare data for prediction
+            var data = tf.tensor2d([[N, P, K, temperature, humidity, ph, rainfall]]);
+    
+            // Load the trained model (Random Forest in this example)
+            async function loadModel() {
+                const model = await tf.loadLayersModel('path/to/your/model.json');
+                const prediction = model.predict(data);
+                const result = prediction.dataSync()[0];
+    
+                // Display the result on the webpage
+                $('#predictionResult').text('Predicted Crop: ' + result);
+            }
+    
+            // Call the loadModel function
+            loadModel();
+        }
+    </script>
+    
+    </body>
+    </html>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Suggestions</title>
+    <link rel="icon" href="https://thumbs.dreamstime.com/z/green-organic-farming-logo-design-concept-organic-logotype-template-organic-farm-fresh-products-unique-sign-icon-art-isolated-97664923.jpg" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #336699;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #336699;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Crop Suggestions</h1>
+    <p>Select a crop for more information:</p>
+    <ul>
+       <a href="wheat.html">  <li onclick="showInfo('Wheat')">Wheat</li></a>
+        <li onclick="showInfo('Rice')">Rice</li>
+         
+        <!-- Add more crop options as needed -->
+    </ul>
+
+    <div id="cropInfo">
+        <!-- Crop information will be displayed here -->
+    </div>
+
+    <script>
+        function showInfo(crop) {
+            // Replace this with actual information retrieval logic
+            var cropInfo = "Information about " + crop + " will be displayed here.";
+            document.getElementById("cropInfo").innerHTML = cropInfo;
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color at Top</title>
+<style>
+  
+  .color-strip {
+    background-image: url(https://wallpaperaccess.com/full/3830895.jpg); 
+    height: 300px;  
+    width: 100%;  
+  }
+
+ 
+  .color-strip-content {
+    color: white;
+    text-align: center;
+    padding-top: 50px;
+  }
+  .ac{
+    font-size: 70px;
+  }
+  .ab{
+   font-size: 30px;
+  
+  }
+  .ad{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  .jkl{
+    text-align: justify;
+    text-justify: inter-word;
+  }
+  img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 200px;
+    width: 400px;
+  }
+  
+</style>
 </head>
 <body>
 
-<div class="container mt-5">
-    <h2 class="mb-4">Crop Recommendation System</h2>
-    <form id="cropForm">
-        <div class="form-group">
-            <label for="N">Nitrogen (N):</label>
-            <input type="text" class="form-control" id="N" name="N" required>
-        </div>
-        <div class="form-group">
-            <label for="P">Phosphorus (P):</label>
-            <input type="text" class="form-control" id="P" name="P" required>
-        </div>
-        <div class="form-group">
-            <label for="K">Potassium (K):</label>
-            <input type="text" class="form-control" id="K" name="K" required>
-        </div>
-        <div class="form-group">
-            <label for="temperature">Temperature:</label>
-            <input type="text" class="form-control" id="temperature" name="temperature" required>
-        </div>
-        <div class="form-group">
-            <label for="humidity">Humidity:</label>
-            <input type="text" class="form-control" id="humidity" name="humidity" required>
-        </div>
-        <div class="form-group">
-            <label for="ph">pH:</label>
-            <input type="text" class="form-control" id="ph" name="ph" required>
-        </div>
-        <div class="form-group">
-            <label for="rainfall">Rainfall:</label>
-            <input type="text" class="form-control" id="rainfall" name="rainfall" required>
-        </div>
-        <button type="button" class="btn btn-primary" onclick="predictCrop()">Predict Crop</button>
-    </form>
-
-    <h4 class="mt-4">Prediction Result:</h4>
-    <p id="predictionResult"></p>
+<div class="color-strip"> 
+  
+  <div class="color-strip-content"><b class="ac"> Wheat Crop Information and Production</b></div>
 </div>
+<br><br>
+<div class="jkl"> 
+  <b class="ab">Information about Wheat Crop</b><br>
+<p>Under the botanical classification wheat crop belongs to genus Triticum. There are many species of this particular genus that is used for cultivation such as Triticum sativum, Triticum polonicum, Triticum monococcum, etc. However, Triticum sativum is the most cultivated wheat variety. The different cultivated varieties of wheat species are distinguished from each other by the number of flowers that are produced.
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-<script>
-    function predictCrop() {
-        // Get input values from the form
-        var N = $('#N').val();
-        var P = $('#P').val();
-        var K = $('#K').val();
-        var temperature = $('#temperature').val();
-        var humidity = $('#humidity').val();
-        var ph = $('#ph').val();
-        var rainfall = $('#rainfall').val();
+    Wheat plants have their leaves growing in a telescopic fashion at the apex of the stem. The last leaf that develops is called flag leaf and it is very important since the photosynthetic rate of this leaf is higher than other leaves. It supplies carbohydrates to the developing ear.</p>
+<br>
+<img src="https://tse2.explicit.bing.net/th?id=OIP.PWwBTXJVLiashAVZwSDQygHaE8&pid=Api&P=0&h=180" alt=""><br>
+<b class="ab">Ideal Conditions for Wheat Cultivation </b><br><br><br>
+<b>Climate for Wheat Farming in India</b><br>
+<p>Wheat is a widely adaptable crop that can be grown in climates ranging from temperate to tropical and cold northern parts. In addition it can be cultivated anywhere from land on sea level to an altitude of up to 3300 meters. Places with a cool, moist weather for most part of the year followed by a short, dry and warm spell is most suited for wheat cultivation. This type of weather condition permits appropriate maturing and ripening of grains. However, areas with heavy rainfall, moist and warm climate are not suited for commercial wheat farming.
 
-        // Prepare data for prediction
-        var data = tf.tensor2d([[N, P, K, temperature, humidity, ph, rainfall]]);
+    Similarly, drought-like conditions, extremely low or high temperatures during the flowering stage would affect the wheat crop. During high temperature, a lot of energy is lost owing to transpiration. Hence, there is very little residual energy left within the crop resulting in low yields. High humidity and low temperature is likely to induce rust attack on the crops.</p>
+<b>Season for Wheat Cultivation in India</b><br>
+    <p>Wheat, in India, is best grown as a rabi or winter season crop since the conditions during that time are conducive for growth and ensures maximum yield. Since wheat is capable of tolerating severe cold it resumes growth in summer after being dormant in winter</p>
+    <b> Soil for Wheat Cultivation</b><br>
+    <p> Wheat needs soil with a moderate amount of water holding capacity. Being very sensitive to water logging, heavy soils with poor drainage capacity is not preferred for wheat cultivation. Generally, black cotton soil with good drainage capacity and a neutral pH is preferred for cultivation. If wheat is grown as a dry crop heavy soil with a good drainage capacity is preferred. On the contrary, soil with moderate drainage capacity is preferred for wheat as irrigated crop. The soil used for wheat cultivation must be free from coarse sand, gravel, stones, have a uniform texture and should be deep. It must be soft enough to permit deeper root penetration.
+    </p>
+    <img src="https://cropnuts.com/wp-content/uploads/2020/06/header-3.jpg" alt=""><br>
+<b>Water Requirement</b><br>
+<p> 
+    Wheat requires 450-650mm of water. Maximum amount of watering is needed during the flowering and heading stage while ripening requires very little water. If cultivated as an irrigated crop, flood irrigation is done once in every 10 days. However, if cultivation is done on black soil, then the irrigation is done once in every 15 days since the soil has a higher amount of water holding capacity.</p>
+<b>Crop Rotation</b>
+<p> 
+    Since wheat takes 100 days to mature two crops can be cultivated on the same field. Wheat is generally sown as a rabi crop- in the month of October. It is very rarely raised as a kharif or main season crop. Hence, crops like cow-peas, Bengal gram, other pulses, onion, ginger, coriander and groundnut (early season variety) are raised as main crop followed by wheat as a late season crop in the same year. In areas of low rainfall and in the North-East, wheat is the only crop cultivated for the year. The next year, farmers cultivate pulses and coriander. In the third year, they cultivate bajra, followed by other non-cereal crops like grains. The fifth year sees wheat cultivation. In case of black cotton soil, farmers cultivate cotton for a year, followed by wheat the next year.</p>
+<b>Planting Material</b>
+<p> 
+    Wheat was an imported cereal during the Independent Era. However, during 1960’s owing to Green Revolution, newer varieties of wheat strains or wheat seeds were introduced that were drought and rust resistant, could withstand higher amount of water logging etc. Till the Green Revolution, wheat that was cultivated in India had very poor resistance and consequently very low yield. The newer more resistant strains that were introduced promised higher yield. Sujata, Jawahar, MACS series, Indra, DDK series, etc. are some of the varieties that were made during and after the Green Revolution period. These varieties are much more resistant to pests and diseases, have better adaptability and can withstand weather changes.</p>
+ 
+    <b>Land Preparation</b>
+<p> 
+    One of the primary requirements of wheat cultivation is that the soil must be free of clods, stones, sand and gravel. Hence, the land must be ploughed at least 3 times during summer before cultivation. The residual crop debris can be burnt in the field itself. Following this the land must be harrowed again during the rainy season to prevent growth of wild plants and weeds. After this heavy harrowing, a light harrowing is done wherein the rots and stubble are removed. This step is conducted immediately before sowing.
+    
+    However, in case of irrigated crop, the land is not ploughed as many times. Irrigation is done before sowing so that there is adequate amount of moisture when sowing is done. In cases where there are problems of white ants and pests, 10% BHC or 5% Aldrin is dusted on the soil at the rate of 12 Kg per acre. This is done generally before the last round of ploughing.
+    
+    In irrigated form of cultivation, the land is manured well and then re-ploughed.</p>
+    <b>Irrigation</b>
+    <p> 
+        Flood irrigation is the most common type of irrigation followed. Although irrigation is needed only once in every 10 days, it is done only once in every 15 days in case black soil is used for cultivation. On an average about 6-7 irrigation cycles are needed for wheat since they are ready for harvest within 120 days. In other words, irrigation is provided at the most crucial stages like:</p>
 
-        // Load the trained model (Random Forest in this example)
-        async function loadModel() {
-            const model = await tf.loadLayersModel('path/to/your/model.json');
-            const prediction = model.predict(data);
-            const result = prediction.dataSync()[0];
 
-            // Display the result on the webpage
-            $('#predictionResult').text('Predicted Crop: ' + result);
-        }
+<ul>
+    <li>Crown root initiation</li>
+    <li>Leaf growth development </li>
+    <li>Jointing Stage which is the most critical stage as it provides evidence that plants have initiated the reproductive phase</li>
+    <li>Flowering stage</li>
+    <li>Ripening stage
+    </li>
+    <li>Maturity stage</li>
+</ul>
+<b class="ab">Diseases and Plant Protection in Wheat Cultivation</b>
+<p>Major diseases affecting wheat crop are powdery mildew, smut, stem rust, foliar blights, bunts and molya. They can be taken care of by:</p>
+<ul>
+    <li>Following a timely sowing cycle</li>
+    <li>Solar treatment of seeds before sowing</li>
+    <li>Using resistant varieties
+    </li>
+    <li>Uprooting the affected plant and burning it</li>
+    
+</ul><br>
+<p>Sulphur, Vivatax, Zinc, Manganese, Agrasen are the chemicals used for treatment.</p><br>
+<b class="ab">Harvesting and Curing Wheat</b>
+<img src="https://tse3.mm.bing.net/th?id=OIP.rI-QS5OFzRHcJ9LUhvx4CwHaEo&pid=Api&P=0&h=180" alt=""><br>
+<p>When the kernels of wheat plant become hard and the plant turns straw-colored, it is time for harvesting the crop. Harvesting is usually done manually with a sickle although for vast areas, machines maybe used. The crop is then threshed using thresher or treading with cattle.</p>
 
-        // Call the loadModel function
-        loadModel();
-    }
-</script>
+<br><br>
+<b style="font-size: 25px;">videos For Referance</b><br><br>
+<a href="https://youtu.be/AonJkhqCRwk?si=Cp2j-oj-yX1OejGn">https://youtu.be/AonJkhqCRwk?si=Cp2j-oj-yX1OejGn</a><br><br>
+<a href="https://youtu.be/JN0ICendQns?si=TTmdnZkxJO35gwXr">https://youtu.be/JN0ICendQns?si=TTmdnZkxJO35gwXr</a><br><br>
+<a href="https://youtu.be/fkO3EhG7v3c?si=548pE7z9HOBXtoMt">https://youtu.be/fkO3EhG7v3c?si=548pE7z9HOBXtoMt</a><br>
+    </div>
+        <p></p>
+
+
+
+
+
 
 </body>
+
+
 </html>
